@@ -1,0 +1,19 @@
+# This file ensures EXACT same clippy behavior locally and in CI
+[build]
+rustflags = ["-D", "warnings"]
+
+[target.'cfg(all())']
+rustflags = [
+    "-D", "clippy::all",
+    "-D", "clippy::pedantic",
+    "-A", "clippy::module_name_repetitions",
+    "-A", "clippy::must_use_candidate",
+    "-A", "clippy::missing_errors_doc",
+    "-A", "clippy::missing_panics_doc",
+    "-A", "clippy::missing_const_for_fn",
+]
+
+# Environment variables that affect builds
+[env]
+RUST_BACKTRACE = "1"
+RUSTFLAGS = "-D warnings"
