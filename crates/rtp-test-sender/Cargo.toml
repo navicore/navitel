@@ -1,0 +1,30 @@
+[package]
+name = "rtp-test-sender"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "rtp-test-sender"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { workspace = true, features = ["full"] }
+bytes.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+anyhow.workspace = true
+
+# RTP specific
+rtp.workspace = true
+webrtc-util = "0.11"
+
+# Audio
+hound.workspace = true
+
+# CLI
+clap = { version = "4.5", features = ["derive"] }
+
+# Utilities
+rand = "0.8"

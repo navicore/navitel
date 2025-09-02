@@ -2,6 +2,7 @@
 resolver = "2"
 members = [
     "crates/rtp-ingest",
+    "crates/rtp-test-sender",
     "crates/audio-router",
     "crates/stt-processor",
     "crates/analytics-engine",
