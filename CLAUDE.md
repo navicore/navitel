@@ -89,6 +89,21 @@ just test        # Run all tests
 - Audio codec transcoding (Opus, G.711, etc.)
 - Real-time backpressure without dropping audio
 - Distributed tracing across async boundaries
+- **Channel swapping bugs** - Simulate and fix common telephony issues
+
+## Channel Swapping Simulator (Future)
+Ed mentioned they see "channel swapping" bugs in production where customer/agent audio gets reversed. We should build simulators for:
+1. Two-party call with agent/customer channels that can be deliberately swapped
+2. Packet reordering scenarios that cause channel confusion  
+3. SSRC changes mid-stream (network reconnections)
+4. Codec transcoding bugs that flip channels
+5. Conference bridge mixing errors
+
+This will help learn:
+- Proper channel tracking through audio pipeline
+- RTP sequence number and SSRC handling
+- Debugging techniques for hard-to-reproduce production issues
+- How stereo/mono conversions can go wrong
 
 ## Resources
 - Repository: https://github.com/navicore/navitel
