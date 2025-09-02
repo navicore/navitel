@@ -84,6 +84,7 @@ impl AudioGenerator {
 }
 
 // µ-law encoding for G.711
+#[allow(clippy::cast_possible_wrap)]
 fn linear_to_ulaw(sample: i16) -> u8 {
     const BIAS: i32 = 0x84;
     const CLIP: i32 = 32635;
@@ -96,8 +97,8 @@ fn linear_to_ulaw(sample: i16) -> u8 {
     }
     magnitude += BIAS;
 
-    let position = magnitude.leading_zeros();
-    let exponent = 7_i32.saturating_sub(position as i32 - 25).clamp(0, 7) as u8;
+    let position = magnitude.leading_zeros() as i32;
+    let exponent = 7_i32.saturating_sub(position - 25).clamp(0, 7) as u8;
 
     let mantissa = if exponent < 8 {
         ((magnitude >> (exponent + 3)) & 0x0F) as u8
