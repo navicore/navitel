@@ -97,7 +97,7 @@ fn linear_to_ulaw(sample: i16) -> u8 {
     magnitude += BIAS;
 
     let position = magnitude.leading_zeros();
-    let exponent = (7 - (position - 25)) as u8;
+    let exponent = 7_i32.saturating_sub(position as i32 - 25).clamp(0, 7) as u8;
 
     let mantissa = if exponent < 8 {
         ((magnitude >> (exponent + 3)) & 0x0F) as u8
