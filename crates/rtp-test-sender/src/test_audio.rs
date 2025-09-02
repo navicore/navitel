@@ -85,27 +85,27 @@ impl AudioGenerator {
 
 // µ-law encoding for G.711
 fn linear_to_ulaw(sample: i16) -> u8 {
-    const BIAS: i16 = 0x84;
-    const CLIP: i16 = 32635;
+    const BIAS: i32 = 0x84;
+    const CLIP: i32 = 32635;
 
-    let mut s = sample >> 2;
-    if s < 0 {
-        s = -s;
+    let sign = if sample < 0 { 0x80 } else { 0 };
+    let mut magnitude = i32::from(sample.abs());
+
+    if magnitude > CLIP {
+        magnitude = CLIP;
     }
-    if s > CLIP {
-        s = CLIP;
-    }
-    s += BIAS;
+    magnitude += BIAS;
 
-    let exponent = s.leading_zeros() as i16 - 17;
-    let mantissa = (s >> (exponent + 3)) & 0x0F;
-    let mut ulawbyte = !(mantissa | (exponent << 4));
+    let position = magnitude.leading_zeros();
+    let exponent = (7 - (position - 25)) as u8;
 
-    if sample < 0 {
-        ulawbyte &= 0x7F;
-    }
+    let mantissa = if exponent < 8 {
+        ((magnitude >> (exponent + 3)) & 0x0F) as u8
+    } else {
+        0x0F
+    };
 
-    ulawbyte as u8
+    !(sign | (exponent << 4) | mantissa)
 }
 
 #[allow(dead_code)]
