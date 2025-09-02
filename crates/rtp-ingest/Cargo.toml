@@ -5,4 +5,31 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 
+[[bin]]
+name = "rtp-ingest"
+path = "src/main.rs"
+
 [dependencies]
+shared-types = { path = "../shared-types" }
+uuid = { version = "1.11", features = ["v4"] }
+tokio = { workspace = true, features = ["full"] }
+bytes.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+# RTP specific
+rtp.workspace = true
+webrtc-util = "0.11"
+
+# Networking
+tokio-util = { version = "0.7", features = ["codec", "net"] }
+futures.workspace = true
+
+# Metrics
+prometheus.workspace = true
+opentelemetry.workspace = true
+opentelemetry-otlp.workspace = true

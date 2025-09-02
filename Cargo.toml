@@ -31,7 +31,6 @@ async-trait = "0.1"
 
 # RTP/Audio specific
 webrtc-media = "0.8"
-webrtc-util = "0.8"
 rtp = "0.13"
 opus = "0.3"
 hound = "3.5"
