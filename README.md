@@ -1,3 +1,8 @@
+<!-- ghmig:moved -->
+> **This repository has moved to [https://git.navicore.tech/navicore/navitel](https://git.navicore.tech/navicore/navitel).**
+>
+> The GitHub copy is archived and no longer maintained.
+
 # Navitel
 
 Real-time telephony audio processing pipeline with latency tracking built in Rust.
